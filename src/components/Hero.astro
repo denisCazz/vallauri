@@ -1,0 +1,93 @@
+---
+interface Props {
+  title: string;
+  subtitle: string;
+  primaryButton?: {
+    text: string;
+    href: string;
+  };
+  secondaryButton?: {
+    text: string;
+    href: string;
+  };
+}
+
+const { title, subtitle, primaryButton, secondaryButton } = Astro.props;
+---
+
+<section class="hero">
+  <h2>{title}</h2>
+  <p>{subtitle}</p>
+  <div class="hero-buttons">
+    {primaryButton && (
+      <a href={primaryButton.href} class="btn btn-primary">{primaryButton.text}</a>
+    )}
+    {secondaryButton && (
+      <a href={secondaryButton.href} class="btn btn-secondary">{secondaryButton.text}</a>
+    )}
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: var(--white);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  .hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--primary);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+  }
+
+  @media (max-width: 768px) {
+    .hero h2 {
+      font-size: 1.75rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+  }
+</style>

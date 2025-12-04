@@ -1,0 +1,80 @@
+---
+interface QuickLink {
+  name: string;
+  icon: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  links: QuickLink[];
+}
+
+const { title, links } = Astro.props;
+---
+
+<section class="quick-access">
+  <h2 class="section-title">{title}</h2>
+  <div class="quick-grid">
+    {links.map(link => (
+      <a href={link.href} class="quick-card">
+        <span class="quick-card-icon">{link.icon}</span>
+        <span class="quick-card-text">{link.name}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .quick-access {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+  }
+
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .quick-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    background: var(--background);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .quick-card:hover {
+    background: var(--primary);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .quick-card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .quick-card-text {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+</style>

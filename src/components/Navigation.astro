@@ -1,0 +1,227 @@
+---
+interface SubMenuItem {
+  name: string;
+  href: string;
+}
+
+interface MenuItem {
+  name: string;
+  href: string;
+  active?: boolean;
+  submenu?: SubMenuItem[];
+}
+
+interface Props {
+  menuItems: MenuItem[];
+}
+
+const { menuItems } = Astro.props;
+---
+
+<nav>
+  <div class="nav-container">
+    <button class="mobile-toggle" aria-label="Menu">☰</button>
+    <ul class="nav-menu">
+      {menuItems.map(item => (
+        <li class="nav-item">
+          <a 
+            href={item.href} 
+            class={`nav-link ${item.active ? 'active' : ''} ${item.submenu ? 'has-submenu' : ''}`}
+          >
+            {item.name}
+          </a>
+          {item.submenu && (
+            <div class="submenu">
+              {item.submenu.map(sub => (
+                <a href={sub.href}>{sub.name}</a>
+              ))}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  nav {
+    background: var(--primary-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 1rem 1.25rem;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: var(--primary);
+  }
+
+  .nav-link.has-submenu::after {
+    content: " ▾";
+    font-size: 0.75rem;
+  }
+
+  /* Dropdown Menu */
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--white);
+    min-width: 220px;
+    box-shadow: var(--shadow-lg);
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+  }
+
+  .nav-item:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .submenu a {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #edf2f7;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .submenu a:last-child {
+    border-bottom: none;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .submenu a:hover {
+    background: var(--primary);
+    color: var(--white);
+  }
+
+  /* Mobile Menu Toggle */
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .nav-menu {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-container {
+      position: relative;
+      flex-direction: column;
+    }
+
+    .mobile-toggle {
+      display: block;
+      align-self: flex-end;
+    }
+
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .nav-menu.active {
+      display: flex;
+    }
+
+    .submenu {
+      position: static;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      box-shadow: none;
+      display: none;
+      background: var(--primary);
+    }
+
+    .nav-item:hover .submenu,
+    .nav-item.active .submenu {
+      display: block;
+    }
+
+    .submenu a {
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.1);
+      padding-left: 2rem;
+    }
+
+    .submenu a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.mobile-toggle');
+    const menu = document.querySelector('.nav-menu');
+    
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('active');
+      });
+    }
+
+    // Mobile submenu toggle
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          const submenu = item.querySelector('.submenu');
+          const target = e.target as HTMLElement;
+          if (submenu && target.classList.contains('nav-link')) {
+            e.preventDefault();
+            item.classList.toggle('active');
+          }
+        }
+      });
+    });
+  });
+</script>

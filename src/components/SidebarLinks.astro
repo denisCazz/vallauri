@@ -1,0 +1,66 @@
+---
+interface SidebarLink {
+  name: string;
+  icon: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  links: SidebarLink[];
+}
+
+const { title, links } = Astro.props;
+---
+
+<section>
+  <h2 class="section-title">{title}</h2>
+  <div class="sidebar-section">
+    {links.map(link => (
+      <a href={link.href} class="sidebar-card">
+        <span class="sidebar-icon">{link.icon}</span>
+        <span>{link.name}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section-title {
+    font-size: 1.75rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent);
+    display: inline-block;
+  }
+
+  .sidebar-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .sidebar-card {
+    background: var(--white);
+    padding: 1.25rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .sidebar-card:hover {
+    background: var(--primary);
+    color: var(--white);
+  }
+
+  .sidebar-icon {
+    font-size: 1.5rem;
+  }
+</style>

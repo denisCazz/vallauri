@@ -1,16 +1,197 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import Highlights from '../components/Highlights.astro';
+import NewsCard from '../components/NewsCard.astro';
+import QuickAccess from '../components/QuickAccess.astro';
+import SidebarLinks from '../components/SidebarLinks.astro';
+import Footer from '../components/Footer.astro';
 
+const menuItems = [
+  { name: "Home", href: "#", active: true },
+  { 
+    name: "Il Vallauri", 
+    href: "#vallauri",
+    submenu: [
+      { name: "Chi siamo", href: "#chi-siamo" },
+      { name: "La nostra storia", href: "#storia" },
+      { name: "Dove siamo", href: "#dove-siamo" },
+    ]
+  },
+  { 
+    name: "Settori di studio", 
+    href: "#settori",
+    submenu: [
+      { name: "Liceo Scienze Applicate", href: "#liceo" },
+      { name: "Settore Tecnologico", href: "#tecnologico" },
+      { name: "Settore Economico", href: "#economico" },
+      { name: "Corso Serale", href: "#serale" },
+    ]
+  },
+  { 
+    name: "Certificazioni", 
+    href: "#certificazioni",
+    submenu: [
+      { name: "ICDL", href: "#icdl" },
+      { name: "Certificazioni Linguistiche", href: "#linguistiche" },
+      { name: "Certificazioni Tecniche", href: "#tecniche" },
+    ]
+  },
+  { 
+    name: "Offerta Formativa", 
+    href: "#offerta",
+    submenu: [
+      { name: "PTOF", href: "#ptof" },
+      { name: "PCTO", href: "#pcto" },
+      { name: "Erasmus Plus", href: "#erasmus" },
+      { name: "PON", href: "#pon" },
+    ]
+  },
+  { 
+    name: "Organizzazione", 
+    href: "#organizzazione",
+    submenu: [
+      { name: "Dirigenza", href: "#dirigenza" },
+      { name: "Segreteria", href: "#segreteria" },
+      { name: "Organi Collegiali", href: "#organi" },
+    ]
+  },
+  { 
+    name: "Documenti", 
+    href: "#documenti",
+    submenu: [
+      { name: "Regolamenti", href: "#regolamenti" },
+      { name: "Modulistica", href: "#modulistica" },
+      { name: "Albo Pretorio", href: "#albo" },
+      { name: "Amministrazione Trasparente", href: "#trasparente" },
+    ]
+  },
+  { 
+    name: "Comunicazioni", 
+    href: "#comunicazioni",
+    submenu: [
+      { name: "Circolari", href: "#circolari" },
+      { name: "News", href: "#news" },
+      { name: "Calendario", href: "#calendario" },
+    ]
+  },
+  { name: "Contatti", href: "#contatti" },
+];
+
+const news = [
+  {
+    title: "ORIENTAMENTO SCOLASTICO 2026/27",
+    date: "4 Dicembre 2025",
+    excerpt: "Nella pagina ORIENTAMENTO del sito trovate l'elenco delle attività promosse dal Vallauri rivolte agli studenti in uscita dalla Scuola Media Inferiore.",
+    image: "🎓",
+    category: "Orientamento"
+  },
+  {
+    title: "IL VALLAURI A JOB&ORIENTA 2025",
+    date: "29 Novembre 2025",
+    excerpt: "Alcuni studenti e docenti del Vallauri hanno partecipato allo stand del Ministero dell'Istruzione a Verona, in occasione di JOB&ORIENTA 2025.",
+    image: "🏆",
+    category: "Eventi"
+  },
+  {
+    title: "EDUSCOPIO 2025: IL VALLAURI ANCORA IN TESTA",
+    date: "Novembre 2025",
+    excerpt: "Il nostro istituto si conferma IN TESTA alle classifiche delle migliori scuole per trovare lavoro con i suoi indirizzi Tecnico ed Economico.",
+    image: "📊",
+    category: "Risultati"
+  },
+  {
+    title: "OLIMPIADI DI CYBERSECURITY 2025",
+    date: "2025",
+    excerpt: "Daniele Cortesi, studente della 5D INFORMATICA, si è brillantemente classificato alle Olimpiadi Italiane di CyberSecurity, ricevendo la medaglia d'oro.",
+    image: "🥇",
+    category: "Successi"
+  },
+  {
+    title: "IL VALLAURI VINCE ALLA GARA DI MOBILITÀ SOSTENIBILE",
+    date: "Marzo 2025",
+    excerpt: "Gli studenti della classe 5C MECC hanno dominato la gara vincendo con più di 150 punti di distacco alla seconda edizione della gara nazionale.",
+    image: "🚗",
+    category: "Successi"
+  },
+  {
+    title: "GREEN TEAM ERASMUS",
+    date: "Ottobre 2025",
+    excerpt: "36 ragazzi lavoreranno sul tema della sostenibilità confrontandosi con compagni provenienti dal Belgio, Portogallo e Ungheria.",
+    image: "🌱",
+    category: "Erasmus"
+  },
+];
+
+const quickLinks = [
+  { name: "Gmail Vallauri", icon: "📧", href: "#gmail" },
+  { name: "Calendario Pubblico", icon: "📅", href: "#calendario" },
+  { name: "Portale Studenti", icon: "🎓", href: "#studenti" },
+  { name: "Portale Docenti", icon: "👨‍🏫", href: "#docenti" },
+  { name: "Pago in Rete", icon: "💳", href: "#pago" },
+  { name: "Area Riservata", icon: "🔐", href: "#area-riservata" },
+];
+
+const highlights = [
+  { title: "85%", subtitle: "Occupazione diplomati tecnici", icon: "💼" },
+  { title: "1°", subtitle: "Liceo Scienze Applicate in Piemonte", icon: "🏅" },
+  { title: "36", subtitle: "Studenti nel Green Team Erasmus", icon: "🌍" },
+  { title: "150+", subtitle: "Punti di vantaggio Gara Mobilità", icon: "🏆" },
+];
+
+const sidebarLinks = [
+  { name: "Albo Pretorio", icon: "📋", href: "#" },
+  { name: "Amministrazione Trasparente", icon: "🔍", href: "#" },
+  { name: "PTOF", icon: "📊", href: "#" },
+  { name: "Erasmus Plus", icon: "🌍", href: "#" },
+  { name: "Rete E-Mobility", icon: "🚗", href: "#" },
+  { name: "S.T.E.M.", icon: "🔬", href: "#" },
+  { name: "Certificazioni ICDL", icon: "📜", href: "#" },
+  { name: "Corso Serale", icon: "🌙", href: "#" },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="IIS G. Vallauri - Fossano">
+  <Header />
+  <Navigation menuItems={menuItems} />
+  
+  <Hero 
+    title="Benvenuti all'IIS G. Vallauri"
+    subtitle="Formazione d'eccellenza dal 1959. Liceo Scienze Applicate, Settore Tecnologico e Settore Economico per costruire il tuo futuro."
+    primaryButton={{ text: "Orientamento 2026/27", href: "#orientamento" }}
+    secondaryButton={{ text: "Scopri i nostri corsi", href: "#settori" }}
+  />
+
+  <Highlights highlights={highlights} />
+
+  <main>
+    <QuickAccess title="Accesso Rapido" links={quickLinks} />
+
+    <section class="news-section">
+      <h2 class="section-title">Ultime Notizie</h2>
+      <div class="news-grid">
+        {news.map(item => (
+          <NewsCard 
+            title={item.title}
+            date={item.date}
+            excerpt={item.excerpt}
+            image={item.image}
+            category={item.category}
+          />
+        ))}
+      </div>
+    </section>
+
+    <SidebarLinks title="Link Utili" links={sidebarLinks} />
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .news-section {
+    margin-bottom: 3rem;
+  }
+</style>

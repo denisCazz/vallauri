@@ -1,0 +1,84 @@
+---
+interface QuickLink {
+  name: string;
+  icon: string;
+  href: string;
+}
+
+interface Props {
+  quickLinks: QuickLink[];
+}
+
+const { quickLinks } = Astro.props;
+
+const today = new Date();
+const options: Intl.DateTimeFormatOptions = { 
+  weekday: 'long', 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric' 
+};
+const formattedDate = today.toLocaleDateString('it-IT', options);
+---
+
+<div class="top-bar">
+  <div class="quick-links">
+    {quickLinks.map(link => (
+      <a href={link.href}>
+        <span>{link.icon}</span>
+        <span>{link.name}</span>
+      </a>
+    ))}
+  </div>
+  <div class="datetime">
+    {formattedDate}
+  </div>
+</div>
+
+<style>
+  .top-bar {
+    background: var(--primary);
+    color: var(--white);
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+
+  .quick-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .quick-links a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: opacity 0.2s;
+  }
+
+  .quick-links a:hover {
+    opacity: 0.8;
+  }
+
+  .datetime {
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+
+  @media (max-width: 768px) {
+    .top-bar {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .quick-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+</style>

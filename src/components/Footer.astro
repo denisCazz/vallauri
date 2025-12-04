@@ -1,0 +1,211 @@
+---
+
+---
+
+<footer>
+  <!-- Loghi Istituzionali -->
+  <div class="institutional-logos">
+    <a href="https://www.vallauri.edu/" target="_blank" rel="noopener noreferrer">
+      <img src="/logo.png" alt="Logo IIS Vallauri" class="logo-vallauri" />
+    </a>
+    <a href="https://www.miur.gov.it/" target="_blank" rel="noopener noreferrer">
+      <img src="/ministero-istruzione.jpg" alt="Ministero dell'Istruzione e del Merito" class="logo-ministero" />
+    </a>
+    <a href="https://www.istruzione.piemonte.it/" target="_blank" rel="noopener noreferrer">
+      <img src="/ministro_istruzione_piemonte.png" alt="USR Piemonte" class="logo-usr" />
+    </a>
+    <a href="https://www.istruzione.it/pon/" target="_blank" rel="noopener noreferrer">
+      <img src="/pon.jpg" alt="PON" class="logo-pon" />
+    </a>
+    <a href="https://www.dschola.it/" target="_blank" rel="noopener noreferrer">
+      <img src="/dscholao.png" alt="DSchola" class="logo-dschola" />
+    </a>
+  </div>
+
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Contatti</h4>
+      <ul>
+        <li>📍 Via San Michele, 68 - 12045 Fossano (CN)</li>
+        <li>📞 Tel: 0172 694969</li>
+        <li>📧 cnis01400v@istruzione.it</li>
+        <li>📧 PEC: cnis01400v@pec.istruzione.it</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Link Istituzionali</h4>
+      <ul>
+        <li><a href="https://www.istruzionecuneo.gov.it/" target="_blank">U.S.P. Cuneo</a></li>
+        <li><a href="https://www.istruzione.piemonte.it/" target="_blank">U.S.R. Piemonte</a></li>
+        <li><a href="https://www.miur.gov.it/" target="_blank">Ministero dell'Istruzione</a></li>
+        <li><a href="https://www.istruzione.it/pon/" target="_blank">PON 2014-2020</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Servizi</h4>
+      <ul>
+        <li><a href="#">Pago in Rete</a></li>
+        <li><a href="#">Registro Elettronico</a></li>
+        <li><a href="#">Libri di Testo</a></li>
+        <li><a href="#">Orario Scolastico</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Informazioni</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Note Legali</a></li>
+        <li><a href="#">Accessibilità</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 IIS "G. Vallauri" - Fossano. Tutti i diritti riservati.</p>
+    <div class="social-links">
+      <a href="#" aria-label="Instagram">📷</a>
+      <a href="#" aria-label="Facebook">📘</a>
+      <a href="#" aria-label="YouTube">▶️</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: var(--primary);
+    color: var(--white);
+    padding: 3rem 2rem 1rem;
+  }
+
+  .footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .footer-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-section li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-section a:hover {
+    color: var(--white);
+  }
+
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 2rem auto 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    color: var(--white);
+    font-size: 1.25rem;
+    transition: opacity 0.2s;
+  }
+
+  .social-links a:hover {
+    opacity: 0.8;
+  }
+
+  /* Loghi Istituzionali */
+  .institutional-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .institutional-logos a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .institutional-logos a:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  .institutional-logos img {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .logo-vallauri {
+    height: 110px !important;
+  }
+
+  .logo-ministero {
+    height: 85px !important;
+  }
+
+  .logo-usr {
+    height: 90px !important;
+  }
+
+  .logo-pon {
+    height: 80px !important;
+  }
+
+  .logo-dschola {
+    height: 85px !important;
+  }
+
+  @media (max-width: 768px) {
+    .institutional-logos {
+      gap: 1.5rem;
+      padding: 1.5rem;
+    }
+
+    .institutional-logos img {
+      height: 60px;
+    }
+
+    .logo-vallauri {
+      height: 75px !important;
+    }
+  }
+</style>
