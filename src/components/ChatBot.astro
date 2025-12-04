@@ -1,0 +1,310 @@
+---
+
+---
+
+<div class="chatbot-container">
+  <button class="chatbot-toggle" aria-label="Apri assistente AI">
+    <svg class="bot-icon" viewBox="0 0 24 24" fill="currentColor">
+      <!-- Robot icon -->
+      <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5z"/>
+    </svg>
+    <span class="bot-pulse"></span>
+  </button>
+
+  <div class="chatbot-popup">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <svg class="bot-avatar" viewBox="0 0 24 24" fill="currentColor">
+          <!-- Robot icon -->
+          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18a2.5 2.5 0 0 0 2.5-2.5A2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5z"/>
+        </svg>
+        <span>Assistente Vallauri</span>
+      </div>
+      <button class="chatbot-close" aria-label="Chiudi">✕</button>
+    </div>
+    <div class="chatbot-body">
+      <div class="chatbot-message bot">
+        <p>👋 Ciao! Sono l'assistente AI del Vallauri.</p>
+        <p>Posso aiutarti con informazioni su:</p>
+        <ul>
+          <li>📚 Corsi e indirizzi di studio</li>
+          <li>📅 Orientamento scolastico</li>
+          <li>📝 Iscrizioni e modulistica</li>
+          <li>📞 Contatti e orari</li>
+        </ul>
+        <p class="bot-note">Questa è una demo. Per informazioni ufficiali, contatta la segreteria.</p>
+      </div>
+    </div>
+    <div class="chatbot-footer">
+      <input type="text" placeholder="Scrivi un messaggio..." disabled />
+      <button disabled>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .chatbot-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+  }
+
+  .chatbot-toggle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+
+  .chatbot-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .bot-icon {
+    width: 32px;
+    height: 32px;
+    color: white;
+  }
+
+  .bot-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+    z-index: -1;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .chatbot-popup {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 320px;
+    max-width: calc(100vw - 2rem);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+  }
+
+  .chatbot-popup.active {
+    display: flex;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .chatbot-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+
+  .bot-avatar {
+    width: 28px;
+    height: 28px;
+  }
+
+  .chatbot-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  .chatbot-close:hover {
+    opacity: 1;
+  }
+
+  .chatbot-body {
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    background: #f8fafc;
+  }
+
+  .chatbot-message {
+    background: white;
+    padding: 0.875rem;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .chatbot-message p {
+    margin: 0 0 0.5rem;
+  }
+
+  .chatbot-message p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .chatbot-message ul {
+    margin: 0.5rem 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .chatbot-message li {
+    margin-bottom: 0.25rem;
+  }
+
+  .bot-note {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-style: italic;
+    margin-top: 0.75rem !important;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .chatbot-footer {
+    padding: 0.75rem;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .chatbot-footer input {
+    flex: 1;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    outline: none;
+    background: #f1f5f9;
+  }
+
+  .chatbot-footer input:disabled {
+    cursor: not-allowed;
+  }
+
+  .chatbot-footer button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+  }
+
+  .chatbot-footer button:disabled {
+    cursor: not-allowed;
+  }
+
+  .chatbot-footer button svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .chatbot-container {
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .chatbot-toggle {
+      width: 56px;
+      height: 56px;
+    }
+
+    .bot-icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .chatbot-popup {
+      width: calc(100vw - 2rem);
+      right: 0;
+      bottom: 65px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.chatbot-toggle');
+    const popup = document.querySelector('.chatbot-popup');
+    const closeBtn = document.querySelector('.chatbot-close');
+
+    if (toggle && popup) {
+      toggle.addEventListener('click', () => {
+        popup.classList.toggle('active');
+      });
+    }
+
+    if (closeBtn && popup) {
+      closeBtn.addEventListener('click', () => {
+        popup.classList.remove('active');
+      });
+    }
+
+    // Chiudi cliccando fuori
+    document.addEventListener('click', (e) => {
+      const container = document.querySelector('.chatbot-container');
+      const target = e.target as HTMLElement;
+      if (container && !container.contains(target) && popup?.classList.contains('active')) {
+        popup.classList.remove('active');
+      }
+    });
+  });
+</script>

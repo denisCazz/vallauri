@@ -206,6 +206,7 @@ const { menuItems } = Astro.props;
     .nav-menu {
       display: none;
       flex-direction: column;
+      flex-wrap: nowrap;
       width: 100%;
       max-height: 70vh;
       overflow-y: auto;
@@ -215,9 +216,14 @@ const { menuItems } = Astro.props;
       display: flex;
     }
 
+    .nav-item {
+      width: 100%;
+    }
+
     .nav-link {
       padding: 1rem 1.25rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
     }
 
     .submenu {
@@ -229,10 +235,13 @@ const { menuItems } = Astro.props;
       display: none;
       background: var(--primary);
       border-radius: 0;
+      width: 100%;
+      min-width: unset;
     }
 
     .nav-item.active .submenu {
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
 
     .submenu a {
@@ -240,6 +249,7 @@ const { menuItems } = Astro.props;
       border-color: rgba(255, 255, 255, 0.1);
       padding-left: 2.5rem;
       font-size: 0.85rem;
+      width: 100%;
     }
 
     .submenu a:hover {
