@@ -20,7 +20,13 @@ const { menuItems } = Astro.props;
 
 <nav>
   <div class="nav-container">
-    <button class="mobile-toggle" aria-label="Menu">☰</button>
+    <div class="nav-header">
+      <a href="/" class="nav-logo">
+        <img src="/logo.png" alt="Logo IIS Vallauri" />
+        <span>IIS Vallauri</span>
+      </a>
+      <button class="mobile-toggle" aria-label="Menu">☰</button>
+    </div>
     <ul class="nav-menu">
       {menuItems.map(item => (
         <li class="nav-item">
@@ -132,15 +138,39 @@ const { menuItems } = Astro.props;
     color: var(--white);
   }
 
+  /* Nav Header (visible on mobile) */
+  .nav-header {
+    display: none;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--white);
+  }
+
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+  }
+
+  .nav-logo span {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
   /* Mobile Menu Toggle */
   .mobile-toggle {
     display: none;
     background: none;
     border: none;
     color: var(--white);
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     cursor: pointer;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem;
+    line-height: 1;
   }
 
   @media (max-width: 1024px) {
@@ -148,27 +178,46 @@ const { menuItems } = Astro.props;
       flex-wrap: wrap;
       justify-content: center;
     }
+
+    .nav-link {
+      padding: 0.875rem 1rem;
+      font-size: 0.85rem;
+    }
   }
 
   @media (max-width: 768px) {
     .nav-container {
-      position: relative;
       flex-direction: column;
+      padding: 0;
+    }
+
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 0.75rem 1rem;
     }
 
     .mobile-toggle {
       display: block;
-      align-self: flex-end;
     }
 
     .nav-menu {
       display: none;
       flex-direction: column;
       width: 100%;
+      max-height: 70vh;
+      overflow-y: auto;
     }
 
     .nav-menu.active {
       display: flex;
+    }
+
+    .nav-link {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .submenu {
@@ -179,9 +228,9 @@ const { menuItems } = Astro.props;
       box-shadow: none;
       display: none;
       background: var(--primary);
+      border-radius: 0;
     }
 
-    .nav-item:hover .submenu,
     .nav-item.active .submenu {
       display: block;
     }
@@ -189,7 +238,8 @@ const { menuItems } = Astro.props;
     .submenu a {
       color: var(--white);
       border-color: rgba(255, 255, 255, 0.1);
-      padding-left: 2rem;
+      padding-left: 2.5rem;
+      font-size: 0.85rem;
     }
 
     .submenu a:hover {
@@ -206,22 +256,42 @@ const { menuItems } = Astro.props;
     if (toggle && menu) {
       toggle.addEventListener('click', () => {
         menu.classList.toggle('active');
+        // Cambia icona hamburger/close
+        toggle.textContent = menu.classList.contains('active') ? '✕' : '☰';
       });
     }
 
     // Mobile submenu toggle
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-          const submenu = item.querySelector('.submenu');
-          const target = e.target as HTMLElement;
-          if (submenu && target.classList.contains('nav-link')) {
-            e.preventDefault();
-            item.classList.toggle('active');
+      const link = item.querySelector('.nav-link');
+      if (link) {
+        link.addEventListener('click', (e) => {
+          if (window.innerWidth <= 768) {
+            const submenu = item.querySelector('.submenu');
+            if (submenu) {
+              e.preventDefault();
+              // Chiudi altri submenu aperti
+              navItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('active');
+                }
+              });
+              item.classList.toggle('active');
+            }
           }
-        }
-      });
+        });
+      }
+    });
+
+    // Chiudi menu quando si clicca fuori
+    document.addEventListener('click', (e) => {
+      const nav = document.querySelector('nav');
+      const target = e.target as HTMLElement;
+      if (nav && !nav.contains(target) && menu?.classList.contains('active')) {
+        menu.classList.remove('active');
+        if (toggle) toggle.textContent = '☰';
+      }
     });
   });
 </script>
