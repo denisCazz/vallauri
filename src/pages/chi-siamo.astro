@@ -1,0 +1,520 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ChatBot from '../components/ChatBot.astro';
+import { menuItems } from '../data/navigation';
+
+const currentPath = "/chi-siamo";
+
+const timeline = [
+  { year: "1959", event: "Fondazione dell'Istituto Tecnico Industriale G. Vallauri" },
+  { year: "1970", event: "Apertura della nuova sede in Via San Michele" },
+  { year: "1985", event: "Introduzione del corso di Informatica" },
+  { year: "2000", event: "Trasformazione in Istituto di Istruzione Superiore" },
+  { year: "2010", event: "Attivazione del Liceo Scientifico opzione Scienze Applicate" },
+  { year: "2020", event: "Nuovi laboratori di ultima generazione" },
+  { year: "Oggi", event: "Oltre 1200 studenti e 150 docenti" },
+];
+
+const valori = [
+  {
+    icon: "📚",
+    title: "Eccellenza Formativa",
+    description: "Offriamo un'istruzione di qualità che prepara gli studenti alle sfide del futuro."
+  },
+  {
+    icon: "🔬",
+    title: "Innovazione",
+    description: "Laboratori all'avanguardia e metodologie didattiche innovative."
+  },
+  {
+    icon: "🤝",
+    title: "Inclusione",
+    description: "Una scuola aperta a tutti, che valorizza le diversità come ricchezza."
+  },
+  {
+    icon: "🌍",
+    title: "Apertura Internazionale",
+    description: "Progetti europei, scambi culturali e certificazioni linguistiche."
+  },
+];
+---
+
+<Layout title="Chi Siamo - IIS G. Vallauri Fossano">
+  <Header />
+  <Navigation menuItems={menuItems} currentPath={currentPath} />
+  
+  <main class="chi-siamo-page">
+    <!-- Hero Section con foto -->
+    <section class="page-hero">
+      <div class="hero-image-container">
+        <img src="/vallauri-scuola.jpg" alt="IIS G. Vallauri - Fossano" class="hero-image" />
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <h1>Chi Siamo</h1>
+        <p>Formazione d'eccellenza dal 1959</p>
+      </div>
+    </section>
+
+    <!-- Introduzione -->
+    <section class="intro-section">
+      <div class="intro-content">
+        <h2>L'Istituto di Istruzione Superiore G. Vallauri</h2>
+        <p>
+          L'IIS "Giancarlo Vallauri" di Fossano è una delle realtà formative più importanti 
+          della provincia di Cuneo. Fondato nel 1959, l'istituto porta il nome del grande 
+          scienziato italiano pioniere dell'elettronica e delle telecomunicazioni.
+        </p>
+        <p>
+          Oggi il Vallauri offre un'ampia gamma di percorsi formativi: dal Liceo Scientifico 
+          opzione Scienze Applicate, agli indirizzi del Settore Tecnologico (Informatica e 
+          Telecomunicazioni, Elettronica ed Elettrotecnica, Meccanica Meccatronica ed Energia), 
+          fino al Settore Economico con l'indirizzo Amministrazione Finanza e Marketing.
+        </p>
+        <p>
+          Con oltre <strong>1200 studenti</strong> e <strong>150 docenti</strong>, il Vallauri 
+          si distingue per l'attenzione all'innovazione didattica, i laboratori all'avanguardia 
+          e i numerosi progetti che connettono la scuola al mondo del lavoro e dell'università.
+        </p>
+      </div>
+    </section>
+
+    <!-- I Nostri Valori -->
+    <section class="valori-section">
+      <h2 class="section-title">I Nostri Valori</h2>
+      <div class="valori-grid">
+        {valori.map(valore => (
+          <div class="valore-card">
+            <span class="valore-icon">{valore.icon}</span>
+            <h3>{valore.title}</h3>
+            <p>{valore.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Timeline Storia -->
+    <section class="storia-section">
+      <h2 class="section-title">La Nostra Storia</h2>
+      <div class="timeline">
+        {timeline.map((item, index) => (
+          <div class={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}>
+            <div class="timeline-content">
+              <span class="timeline-year">{item.year}</span>
+              <p>{item.event}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Numeri -->
+    <section class="numeri-section">
+      <h2 class="section-title">Il Vallauri in Numeri</h2>
+      <div class="numeri-grid">
+        <div class="numero-card">
+          <span class="numero">1200+</span>
+          <span class="numero-label">Studenti</span>
+        </div>
+        <div class="numero-card">
+          <span class="numero">150+</span>
+          <span class="numero-label">Docenti</span>
+        </div>
+        <div class="numero-card">
+          <span class="numero">30+</span>
+          <span class="numero-label">Laboratori</span>
+        </div>
+        <div class="numero-card">
+          <span class="numero">65+</span>
+          <span class="numero-label">Anni di Storia</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="mission-section">
+      <div class="mission-content">
+        <h2>La Nostra Mission</h2>
+        <blockquote>
+          "Formare cittadini consapevoli e professionisti competenti, capaci di affrontare 
+          le sfide di un mondo in continua evoluzione, attraverso un'educazione che unisce 
+          rigore scientifico, competenze tecniche e valori umani."
+        </blockquote>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ChatBot />
+</Layout>
+
+<style>
+  .chi-siamo-page {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hero con immagine */
+  .page-hero {
+    position: relative;
+    height: 50vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 54, 93, 0.85) 0%, rgba(43, 108, 176, 0.75) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    padding: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-content p {
+    font-size: 1.5rem;
+    opacity: 0.95;
+  }
+
+  /* Intro Section */
+  .intro-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .intro-content h2 {
+    color: var(--primary);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  /* Valori Section */
+  .valori-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    padding: 4rem 2rem;
+  }
+
+  .valori-section .section-title {
+    color: white;
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+    display: block;
+    text-align: center;
+  }
+
+  .valori-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .valore-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .valore-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .valore-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .valore-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .valore-card p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  /* Storia Timeline */
+  .storia-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .storia-section .section-title {
+    display: block;
+    text-align: center;
+  }
+
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 1rem 2rem;
+  }
+
+  .timeline-item.left {
+    left: 0;
+    text-align: right;
+    padding-right: 3rem;
+  }
+
+  .timeline-item.right {
+    left: 50%;
+    text-align: left;
+    padding-left: 3rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    width: 16px;
+    height: 16px;
+    background: var(--accent);
+    border: 4px solid white;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+  }
+
+  .timeline-item.left::before {
+    right: -8px;
+  }
+
+  .timeline-item.right::before {
+    left: -8px;
+  }
+
+  .timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+  }
+
+  .timeline-year {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* Numeri Section */
+  .numeri-section {
+    background: var(--background);
+    padding: 4rem 2rem;
+  }
+
+  .numeri-section .section-title {
+    display: block;
+    text-align: center;
+  }
+
+  .numeri-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .numero-card {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .numero {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .numero-label {
+    font-size: 1rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Mission Section */
+  .mission-section {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    padding: 5rem 2rem;
+  }
+
+  .mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+  }
+
+  .mission-content h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .mission-content blockquote {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    font-style: italic;
+    opacity: 0.95;
+    position: relative;
+    padding: 0 2rem;
+  }
+
+  .mission-content blockquote::before,
+  .mission-content blockquote::after {
+    content: '"';
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.3);
+    position: absolute;
+    font-family: Georgia, serif;
+  }
+
+  .mission-content blockquote::before {
+    top: -1rem;
+    left: 0;
+  }
+
+  .mission-content blockquote::after {
+    bottom: -2rem;
+    right: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+    }
+
+    .timeline::before {
+      left: 20px;
+    }
+
+    .timeline-item {
+      width: 100%;
+      padding-left: 50px !important;
+      padding-right: 1rem !important;
+      text-align: left !important;
+    }
+
+    .timeline-item.left,
+    .timeline-item.right {
+      left: 0;
+    }
+
+    .timeline-item::before {
+      left: 12px !important;
+      right: auto !important;
+    }
+
+    .numeri-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .numero {
+      font-size: 2.5rem;
+    }
+
+    .mission-content blockquote {
+      font-size: 1.1rem;
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .page-hero {
+      min-height: 300px;
+    }
+
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .valori-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

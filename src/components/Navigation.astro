@@ -13,9 +13,17 @@ interface MenuItem {
 
 interface Props {
   menuItems: MenuItem[];
+  currentPath?: string;
 }
 
-const { menuItems } = Astro.props;
+const { menuItems, currentPath = "/" } = Astro.props;
+
+// Funzione per determinare se un item è attivo
+function isActive(item: MenuItem): boolean {
+  if (item.href === currentPath) return true;
+  if (item.submenu?.some(sub => sub.href === currentPath)) return true;
+  return false;
+}
 ---
 
 <nav>
@@ -32,14 +40,14 @@ const { menuItems } = Astro.props;
         <li class="nav-item">
           <a 
             href={item.href} 
-            class={`nav-link ${item.active ? 'active' : ''} ${item.submenu ? 'has-submenu' : ''}`}
+            class={`nav-link ${isActive(item) ? 'active' : ''} ${item.submenu ? 'has-submenu' : ''}`}
           >
             {item.name}
           </a>
           {item.submenu && (
             <div class="submenu">
               {item.submenu.map(sub => (
-                <a href={sub.href}>{sub.name}</a>
+                <a href={sub.href} class={sub.href === currentPath ? 'active' : ''}>{sub.name}</a>
               ))}
             </div>
           )}

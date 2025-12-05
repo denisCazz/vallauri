@@ -9,77 +9,9 @@ import QuickAccess from '../components/QuickAccess.astro';
 import SidebarLinks from '../components/SidebarLinks.astro';
 import Footer from '../components/Footer.astro';
 import ChatBot from '../components/ChatBot.astro';
+import { menuItems } from '../data/navigation';
 
-const menuItems = [
-  { name: "Home", href: "#", active: true },
-  { 
-    name: "Il Vallauri", 
-    href: "#vallauri",
-    submenu: [
-      { name: "Chi siamo", href: "#chi-siamo" },
-      { name: "La nostra storia", href: "#storia" },
-      { name: "Dove siamo", href: "#dove-siamo" },
-    ]
-  },
-  { 
-    name: "Settori di studio", 
-    href: "#settori",
-    submenu: [
-      { name: "Liceo Scienze Applicate", href: "#liceo" },
-      { name: "Settore Tecnologico", href: "#tecnologico" },
-      { name: "Settore Economico", href: "#economico" },
-      { name: "Corso Serale", href: "#serale" },
-    ]
-  },
-  { 
-    name: "Certificazioni", 
-    href: "#certificazioni",
-    submenu: [
-      { name: "ICDL", href: "#icdl" },
-      { name: "Certificazioni Linguistiche", href: "#linguistiche" },
-      { name: "Certificazioni Tecniche", href: "#tecniche" },
-    ]
-  },
-  { 
-    name: "Offerta Formativa", 
-    href: "#offerta",
-    submenu: [
-      { name: "PTOF", href: "#ptof" },
-      { name: "PCTO", href: "#pcto" },
-      { name: "Erasmus Plus", href: "#erasmus" },
-      { name: "PON", href: "#pon" },
-    ]
-  },
-  { 
-    name: "Organizzazione", 
-    href: "#organizzazione",
-    submenu: [
-      { name: "Dirigenza", href: "#dirigenza" },
-      { name: "Segreteria", href: "#segreteria" },
-      { name: "Organi Collegiali", href: "#organi" },
-    ]
-  },
-  { 
-    name: "Documenti", 
-    href: "#documenti",
-    submenu: [
-      { name: "Regolamenti", href: "#regolamenti" },
-      { name: "Modulistica", href: "#modulistica" },
-      { name: "Albo Pretorio", href: "#albo" },
-      { name: "Amministrazione Trasparente", href: "#trasparente" },
-    ]
-  },
-  { 
-    name: "Comunicazioni", 
-    href: "#comunicazioni",
-    submenu: [
-      { name: "Circolari", href: "#circolari" },
-      { name: "News", href: "#news" },
-      { name: "Calendario", href: "#calendario" },
-    ]
-  },
-  { name: "Contatti", href: "#contatti" },
-];
+const currentPath = "/";
 
 const news = [
   {
@@ -156,11 +88,12 @@ const sidebarLinks = [
 
 <Layout title="IIS G. Vallauri - Fossano">
   <Header />
-  <Navigation menuItems={menuItems} />
+  <Navigation menuItems={menuItems} currentPath={currentPath} />
   
   <Hero 
     title="Benvenuti all'IIS G. Vallauri"
     subtitle="Formazione d'eccellenza dal 1959. Liceo Scienze Applicate, Settore Tecnologico e Settore Economico per costruire il tuo futuro."
+    backgroundImage="/vallauri-scuola.jpg"
     primaryButton={{ text: "Orientamento 2026/27", href: "#orientamento" }}
     secondaryButton={{ text: "Scopri i nostri corsi", href: "#settori" }}
   />
